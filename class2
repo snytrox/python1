@@ -14,16 +14,16 @@ class Banka:
             print("Henüz kayıtlı müşteri bulunmamaktadır.")
             return
         for müşteri in Banka.liste:
-            print(f"- {müşteri.name} {müşteri.surname}, Yaş: {müşteri.age}, Bakiye: {müşteri.budge}")
+            print(f"- {müşteri.name} {müşteri.surname}, Yaş: {müşteri.age}, Bakiye: {müşteri.budget}")
 
     def üyeol(self):
         name = input("adınızı giriniz:")
         surname= input("soyadınızı giriniz:")
         age= int(input("yaşınızı giriniz:"))
-        budge=0
+        budget=0
         if age>=18:
             print("üye kaydı yapıldı")
-            yeni_üye = Banka(name, surname, age, budge)
+            yeni_üye = Banka(name, surname, age, budget)
             return yeni_üye
         else:
             print("kayıt yapılmadı")
