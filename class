@@ -1,0 +1,43 @@
+class UzunlukHesapla:
+    def __init__(self,x1=None,y1=None,x2=None,y2=None):
+        self.x1=x1
+        self.y1=y1
+        self.x2=x2
+        self.y2=y2
+    def uzunluk(self):
+        hesap = (((self.x2-self.x1)**2+(self.y2-self.y1)**2)**0.5)
+        return hesap
+    def dogru_eğimi(self):
+        if self.x2 - self.x1 == 0:
+            return "tanımsız (Dikey Doğru)"
+        hesap = (self.y2-self.y1)/(self.x2-self.x1)
+        return hesap
+    def bilgi(self):
+        try:
+            x1=int(input("x1: sayısını giriniz: "))
+            y1=int(input("y1: sayısını giriniz: "))
+            x2=int(input("x2: sayısını giriniz: "))
+            y2=int(input("y2: sayısını giriniz: "))
+        except ValueError:
+            print("yalnız sayı giriniz")
+        self.x1=x1
+        self.y1=y1
+        self.x2=x2
+        self.y2=y2
+        
+    def çalıştır(self):
+        tür=input("eğim hesabı için:1, noktalar arasın uzaklık için:2 ye basınız: ")
+        if tür=="1":
+            self.bilgi()
+            sonuc = self.dogru_eğimi()
+            print("Hesaplanan eğim:", sonuc)
+            
+        elif tür =="2":
+            self.bilgi()
+            sonuc = self.uzunluk()
+            print("Noktalar arası uzaklık:", sonuc)
+        else:
+            print("invalid login")
+
+hesap = UzunlukHesapla()
+hesap.çalıştır()
