@@ -20,22 +20,22 @@ class Banka:
         name = input("adınızı giriniz:")
         surname= input("soyadınızı giriniz:")
         age= int(input("yaşınızı giriniz:"))
-        budget=0
+        budge=0
         if age>=18:
-            print("üye kaydı yapıldı")
-            yeni_üye = Banka(name, surname, age, budget)
-            return yeni_üye
+            
+            yeni_üye = Banka(name, surname, age, budge)
+            return "üye kaydı yapıldı"
         else:
             print("kayıt yapılmadı")
 
     def üyelikiptali(self,kişi,soyisim):
         for kayıt in Banka.liste:
-            if kayıt.name==kişi and kayıt.surname:
+            if kayıt.name==kişi and kayıt.surname==soyisim:
                 verilenpara=kayıt.budget
-                kayıt.paraçek(verilenpara)
+                print(kayıt.paraçek(verilenpara))
                 Banka.liste.remove(kayıt)
                 print(f"""{verilenpara} paranızı bankamatikten alabilirsiniz
-                üyeliğiniz iptal edilmiştir başarıyla""")
+üyeliğiniz iptal edilmiştir başarıyla""")
                 
             else:
                 print("işlem gerçekleştirilemedi")
@@ -45,8 +45,8 @@ class Banka:
         return(f"{self.name} {self.surname} {self.age} {self.budget}")
 
     def üyeara(self,kişi,soyismi):
-        for kayıt in self.liste:
-            if kayıt.name==kişi and kayıt.surname:
+        for kayıt in Banka.liste:
+            if kayıt.name==kişi and kayıt.surname==soyisim:
                 print("kişi bulundu")
                 kayıt.bilgiekranı()
             else:
@@ -59,5 +59,5 @@ class Banka:
             self.budget-=tutar
             return f"{tutar} tl çekilmiştir yeni bakiyeniz: {self.budget}"
         else:
-            print("işlem yapılamadı")
+            return "işlem yapılamadı"
             
