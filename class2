@@ -1,63 +1,64 @@
-class Banka:
-    bankaname = "YATIRIM HARİKASI"
-    liste =[]
-    def __init__(self,name,surname,age,budget=0):
-        self.name=name
-        self.surname=surname
-        self.age=age
-        self.budget=budget
-        Banka.liste.append(self)
-       
-    def kayıtlı_kişiler(self):
-        print(20*"*","kayıtlı müşteriler",20*"*")
-        if not Banka.liste:
-            print("Henüz kayıtlı müşteri bulunmamaktadır.")
+class Bank:
+    bank_name = "INVESTMENT WONDER"
+    customers = []
+
+    def __init__(self, name, surname, age, balance=0):
+        self.name = name
+        self.surname = surname
+        self.age = age
+        self.balance = balance
+        Bank.customers.append(self)
+
+    def registered_customers(self):
+        print("*" * 20, "REGISTERED CUSTOMERS", "*" * 20)
+        if not Bank.customers:
+            print("No registered customers yet.")
             return
-        for müşteri in Banka.liste:
-            print(f"- {müşteri.name} {müşteri.surname}, Yaş: {müşteri.age}, Bakiye: {müşteri.budget}")
 
-    def üyeol(self):
-        name = input("adınızı giriniz:")
-        surname= input("soyadınızı giriniz:")
-        age= int(input("yaşınızı giriniz:"))
-        budge=0
-        if age>=18:
-            
-            yeni_üye = Banka(name, surname, age, budge)
-            return "üye kaydı yapıldı"
+        for customer in Bank.customers:
+            print(f"- {customer.name} {customer.surname}, Age: {customer.age}, Balance: {customer.balance}")
+
+    def sign_up(self):
+        name = input("Enter your name: ")
+        surname = input("Enter your surname: ")
+        age = int(input("Enter your age: "))
+        balance = 0
+
+        if age >= 18:
+            Bank(name, surname, age, balance)
+            return "Membership successfully created"
         else:
-            print("kayıt yapılmadı")
+            print("Registration failed (age must be 18+)")
 
-    def üyelikiptali(self,kişi,soyisim):
-        for kayıt in Banka.liste:
-            if kayıt.name==kişi and kayıt.surname==soyisim:
-                verilenpara=kayıt.budget
-                print(kayıt.paraçek(verilenpara))
-                Banka.liste.remove(kayıt)
-                print(f"""{verilenpara} paranızı bankamatikten alabilirsiniz
-üyeliğiniz iptal edilmiştir başarıyla""")
-                
-            else:
-                print("işlem gerçekleştirilemedi")
-        
+    def cancel_membership(self, person, surname):
+        for record in Bank.customers:
+            if record.name == person and record.surname == surname:
+                given_money = record.balance
+                print(record.withdraw(given_money))
+                Bank.customers.remove(record)
+                print(f"""{given_money} can be withdrawn from the ATM
+Your membership has been successfully cancelled""")
+                return
+        print("Operation failed")
 
-    def bilgiekranı(self):
-        return(f"{self.name} {self.surname} {self.age} {self.budget}")
+    def info_screen(self):
+        return f"{self.name} {self.surname} {self.age} {self.balance}"
 
-    def üyeara(self,kişi,soyismi):
-        for kayıt in Banka.liste:
-            if kayıt.name==kişi and kayıt.surname==soyisim:
-                print("kişi bulundu")
-                kayıt.bilgiekranı()
-            else:
-                print("aradığınız kişi bulunamadı")
-    def parayatır(self,tutar):
-        self.budget +=tutar
-        return f"{tutar} tl eklenmiştir hesabınıza yeni bakiyeniz: {self.budget}"
-    def paraçek(self,tutar):
-        if tutar<=self.budget:
-            self.budget-=tutar
-            return f"{tutar} tl çekilmiştir yeni bakiyeniz: {self.budget}"
+    def search_member(self, person, surname):
+        for record in Bank.customers:
+            if record.name == person and record.surname == surname:
+                print("Customer found")
+                print(record.info_screen())
+                return
+        print("Customer not found")
+
+    def deposit(self, amount):
+        self.balance += amount
+        return f"{amount} TL deposited. New balance: {self.balance}"
+
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            return f"{amount} TL withdrawn. New balance: {self.balance}"
         else:
-            return "işlem yapılamadı"
-            
+            return "Operation failed"
